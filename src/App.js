@@ -43,7 +43,7 @@ function deletus(index) {
         <input type="text" name="date" value={thing.date} onChange={inputChanged} />
         <input type="submit" value="Add" />
       </form>
-      <Todotable todos={todos}/>
+      <Todotable todos={todos} setTodos={setTodos}/>
       
     </div>
   );

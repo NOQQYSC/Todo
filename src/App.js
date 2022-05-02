@@ -5,6 +5,12 @@ import { AgGridReact } from 'ag-grid-react';
 import { useRef } from 'react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-material.css';
+import Button from'@mui/material/Button';
+import TextField from'@mui/material/TextField';
+import Stack from'@mui/material/Stack';
+import TabApp from './components/menu';
+
+
 
 function App() {
   const [thing, setThing] = useState({desc: '', date: '', priority: ''})
@@ -52,32 +58,11 @@ const deleteTodo = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        Simple Todolist
-      </header>
-      
+      <TabApp thing={thing} addTodo={addTodo} deleteTodo={deleteTodo} gridRef={gridRef} inputChanged={inputChanged} todos={todos} columns={columns}/>
+
         
       
-      Description: 
-      <input type="text" placeholder="Description" name="desc" value={thing.desc} onChange={inputChanged} />
-        Date:
-        <input type="text" placeholder="Date" name="date" value={thing.date} onChange={inputChanged} />
-        <input type="text" placeholder="Priority" name="priority" value={thing.priority} onChange={inputChanged} />
-        <button onClick={addTodo}>Add</button>
-        <button onClick={deleteTodo}>Delete</button>
       
-      <div className="ag-theme-material" style={{height: '700px', width: '80%', margin: 'auto'}}>
-      <AgGridReact
-        
-        ref={gridRef}
-        onGridReady={ params => gridRef.current = params.api }
-        rowSelection="single"
-        columnDefs={columns}
-        rowData={todos}
-        animateRows={true}
-        >
-      </AgGridReact>
-      </div>
     </div>
   );
 }

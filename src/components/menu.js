@@ -8,6 +8,13 @@ import 'ag-grid-community/dist/styles/ag-theme-material.css';
 import Button from'@mui/material/Button';
 import TextField from'@mui/material/TextField';
 import Stack from'@mui/material/Stack';
+import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import {
+  DatePicker,
+  TimePicker,
+  DateTimePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 
 function TabApp(props) {
     
@@ -16,6 +23,10 @@ function TabApp(props) {
     const handleChange = (event, value) => {
           setValue(value);
         };
+
+      function setDate(newDate) {
+        props.setThing({ ...props.thing, date: newDate})
+      }
 
     return (
     <div>
@@ -26,12 +37,17 @@ function TabApp(props) {
         {value === 'home' && <div><h1>Welcome to the Home Page!</h1></div>}   
         {value === 'todos' && <div>
         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <DatePicker 
+        label="Date" 
+        name="date"
+        value={props.thing.date} 
+        //onChange={props.handleDateChange} 
+        onChange={newDate => setDate(newDate)} />
+        </MuiPickersUtilsProvider>
+        
+
         <TextField
-          label="Date"
-          variant="standard"
-          name="date" value={props.thing.date}
-          onChange={props.inputChanged}/>
-          <TextField
           label="Description"
           variant="standard"
           name="desc" value={props.thing.desc}

@@ -9,12 +9,20 @@ import Button from'@mui/material/Button';
 import TextField from'@mui/material/TextField';
 import Stack from'@mui/material/Stack';
 import TabApp from './components/menu';
+import DateFnsUtils from '@date-io/date-fns'; // choose your lib
+import {
+  DatePicker,
+  TimePicker,
+  DateTimePicker,
+  MuiPickersUtilsProvider,
+} from '@material-ui/pickers';
 
 
 
 function App() {
-  const [thing, setThing] = useState({desc: '', date: '', priority: ''})
+  const [thing, setThing] = useState({desc: '', date: new Date(), priority: ''})
   const [todos, setTodos] = useState([])
+  const [selectedDate, handleDateChange] = useState(new Date());
   const gridRef = useRef()
 
 
@@ -58,9 +66,11 @@ const deleteTodo = () => {
 
   return (
     <div className="App">
-      <TabApp thing={thing} addTodo={addTodo} deleteTodo={deleteTodo} gridRef={gridRef} inputChanged={inputChanged} todos={todos} columns={columns}/>
+      <TabApp thing={thing} addTodo={addTodo} deleteTodo={deleteTodo} 
+      gridRef={gridRef} inputChanged={inputChanged} todos={todos} columns={columns} selectedDate={selectedDate}
+      handleDateChange={handleDateChange} setThing={setThing}/>
 
-        
+      
       
       
     </div>
